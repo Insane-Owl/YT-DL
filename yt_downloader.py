@@ -1,4 +1,3 @@
-from turtle import down
 import PySimpleGUI as sg # Imports PySimpleGUI, for a GUI.
 from pytube import YouTube # Imports PyTube, for downloading YouTube videos.
 from moviepy.editor import VideoFileClip, AudioFileClip, concatenate_videoclips  # imports moviepy's required functions, for merging audio and video.
@@ -198,7 +197,7 @@ def main():
         [sg.Text('Channel:', font='Default 10 bold'), sg.Text('', key='-YT CHANNEL-')],
         [sg.Text('Length:', font='Default 10 bold'), sg.Text('', key='-YT LENGTH-')],
         [sg.Text('Views:', font='Default 10 bold'), sg.Text('', key='-YT VIEWS-')],
-        [sg.Button('Download'),sg.Text('Downloading... (This may take some time.)', key='-DOWNLOADING-', visible=False), sg.Text('Downloaded', text_color='#009e1f', key='-DL COMPLETE-', visible=False)]
+        [sg.Button('Download'),sg.Text('Downloading...  (This may take some time.)', key='-DOWNLOADING-', visible=False), sg.Text('Downloaded', text_color='#009e1f', key='-DL COMPLETE-', visible=False)]
     ]
     
     # ---------- main layout ----------
