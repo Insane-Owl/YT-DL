@@ -138,7 +138,8 @@ def stream_select(window):
     
 def selectPath(itag, window):
     title = yt.title
-    pathPrompt = sg.popup_get_file('Download Path', save_as=True, no_window=True, file_types=(('MPEG-4','*.mp4'),), icon='yt_dl.ico')
+    title = ''.join(ch for ch in title if ch.isalnum())
+    pathPrompt = sg.popup_get_file('Download Path', save_as=True, no_window=True,default_path=title, default_extension='.mp4', file_types=(('MPEG-4','*.mp4'),), icon='yt_dl.ico')
     if len(pathPrompt) > 0:
         downloadPath = pathPrompt
         
