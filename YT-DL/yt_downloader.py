@@ -103,50 +103,53 @@ def stream_select(window):
         elif event == 'Select':
             if values['-144p-']:
                 stream_window.close()
-                dl = threading.Thread(target=download, args=(res_to_itag['144p'], window))
+                dl = threading.Thread(target=selectPath, args=(res_to_itag['144p'], window))
                 dl.start()
             elif values['-240p-']:
                 stream_window.close()
-                dl = threading.Thread(target=download, args=(res_to_itag['240p'], window))
+                dl = threading.Thread(target=selectPath, args=(res_to_itag['240p'], window))
                 dl.start()
             elif values['-360p-']:
                 stream_window.close()
-                dl = threading.Thread(target=download, args=(res_to_itag['360p'], window))
+                dl = threading.Thread(target=selectPath, args=(res_to_itag['360p'], window))
                 dl.start()
             elif values['-480p-']:
                 stream_window.close()
-                dl = threading.Thread(target=download, args=(res_to_itag['480p'], window))
+                dl = threading.Thread(target=selectPath, args=(res_to_itag['480p'], window))
                 dl.start()
             elif values['-720p-']:
                 stream_window.close()
-                dl = threading.Thread(target=download, args=(res_to_itag['720p'], window))
+                dl = threading.Thread(target=selectPath, args=(res_to_itag['720p'], window))
                 dl.start()
             elif values['-1080p-']:
                 stream_window.close()
-                dl = threading.Thread(target=download, args=(res_to_itag['1080p'], window))
+                dl = threading.Thread(target=selectPath, args=(res_to_itag['1080p'], window))
                 dl.start()
             elif values['-1440p-']:
                 stream_window.close()
-                dl = threading.Thread(target=download, args=(res_to_itag['1440p'], window))
+                dl = threading.Thread(target=selectPath, args=(res_to_itag['1440p'], window))
                 dl.start()
             elif values['-4k-']:
                 stream_window.close()
-                dl = threading.Thread(target=download, args=(res_to_itag['4k'], window))
+                dl = threading.Thread(target=selectPath, args=(res_to_itag['4k'], window))
                 dl.start()
         
     stream_window.close()
     
-def download(itag, window):
-    
+def selectPath(itag, window):
     title = yt.title
-    pathPrompt = sg.popup_get_file('Download Path',save_as=True, no_window=True, default_path=title, default_extension='.mp4', file_types=(('MPEG-4','*.mp4'),), icon='yt_dl.ico')
+    pathPrompt = sg.popup_get_file('Download Path', save_as=True, no_window=True, file_types=(('MPEG-4','*.mp4'),), icon='yt_dl.ico')
     if len(pathPrompt) > 0:
         downloadPath = pathPrompt
-    
+        
         window['-DOWNLOADING-'].update(visible=True)
         window['-DL COMPLETE-'].update(visible=False)
         window['Download'].update(disabled=True)
         window['Search'].update(disabled=True)
+        
+        download(itag, window, downloadPath)
+          
+def download(itag, window, downloadPath):
         
         videoStream = yt.streams.get_by_itag(itag)
         audioStream = yt.streams.filter(adaptive=True,only_audio=True).order_by('abr').desc().first()
